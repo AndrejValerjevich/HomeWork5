@@ -7,14 +7,14 @@ if (!empty($_GET["pageType"])) {
     if ($typeOfPage == "1") {
         $head = "Главная страница";
         $fieldsetClass = "main-container-fieldset__start";
-    } else
+    } else {
         if ($typeOfPage == "2") {
             $head = "Адреса JSON";
             $fieldsetClass = "main-container-fieldset-info";
         }
+    }
 }
-else
-{
+else {
     $head = "Главная страница";
     $fieldsetClass = "main-container-fieldset__start";
 }
@@ -32,6 +32,7 @@ $response = json_decode($content,true);
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="favicon.ico">
     <title>JSON:)</title>
 </head>
 <body>
@@ -47,17 +48,17 @@ $response = json_decode($content,true);
         <?php if ($head === "Адреса JSON") { ?>
         <table class="main-container-table">
             <tr class="table-row">
-                <td class="table-cell">Фамилия</td>
                 <td class="table-cell">Имя</td>
+                <td class="table-cell">Фамилия</td>
                 <td class="table-cell">Адрес</td>
                 <td class="table-cell">Телефон</td>
             </tr>
-            <?php for ($i=0; $i<count($response); $i++) { ?>
+            <?php foreach ($response as $row) { ?>
             <tr class="table-row">
-                <td class="table-cell"><?= $response[$i]['firstName'];?></td>
-                <td class="table-cell"><?= $response[$i]['lastName'];?></td>
-                <td class="table-cell"><?= $response[$i]['address'];?></td>
-                <td class="table-cell"><?= $response[$i]['phoneNumber'];?></td>
+                <td class="table-cell"><?= $row['firstName'];?></td>
+                <td class="table-cell"><?= $row['lastName'];?></td>
+                <td class="table-cell"><?= $row['address'];?></td>
+                <td class="table-cell"><?= $row['phoneNumber'];?></td>
             </tr>
         <?php } ?>
         </table>
